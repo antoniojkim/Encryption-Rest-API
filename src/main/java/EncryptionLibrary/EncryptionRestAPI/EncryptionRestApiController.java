@@ -15,7 +15,7 @@ public class EncryptionRestApiController {
 
     @GetMapping("/")
     public String defaultPage() {
-        return "Hello! This is the custom Encryption Rest API by Antonio Kim. Visit ";
+        return "Hello! This is the Encryption Rest API by Antonio Kim. Visit https://github.com/antoniok9130/Encryption-Rest-API to see how to use this API.";
     }
 
     private ByteEncryption be = new ByteEncryption("");
@@ -42,6 +42,11 @@ public class EncryptionRestApiController {
         public void setKey(String key) {
             if (this.key == null) this.key = key;
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/error", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+    public ResponseEntity<String> error(){
+        return new ResponseEntity<String>("Encryption Rest API by Antonio Kim is not available right now.", HttpStatus.BAD_REQUEST);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/key/generate", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
