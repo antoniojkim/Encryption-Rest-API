@@ -24,7 +24,7 @@ public class EncryptionRestApiController {
         private String key = null;
         private String message = null;
         public PrivateKey(byte[] key, String message){
-            this(ByteArrayOperations.bytesToUnicode(key), message);
+            this(ByteArrayOperations.bytesToHex(key), message);
         }
         public PrivateKey(String key, String message){
             this.key = key;

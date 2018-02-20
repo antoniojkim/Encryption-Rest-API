@@ -15,7 +15,13 @@ Params: length (Integer)
 
 Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/key/generate)
 
- This generates a unicode private key of specified length (default 64) that can be used in other API requests.
+This generates a hex private key of twice the specified length (default 64) that can be used in other API requests.
+ 
+Returns: **JSON**
+
+E.g.
+
+`{"key":"E23D8925935EAA5A02D90ED22B4890297A6FE11552D0D498E707182E749BB05DFB886E8EA9B782955A9C0CBC4439A23402764CD8D46B0C9538711EAFB1C25EAE","message":"Generated Private Key"}`
 
 ### Encrypt a string
 
@@ -30,6 +36,14 @@ Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/encrypt?stri
 
 This encrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
+Returns: **JSON**
+
+E.g. 
+
+`{"original":"example","encrypted":"F05285358D32726358A1072AC667B789976384D3EEA91F77A94EF4652CFC74AB"}`
+
+
+
 ### Decrypt a string
 
 ```
@@ -43,6 +57,12 @@ Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/decrypt?stri
 
 This decrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
+Returns: **JSON**
+
+E.g.
+
+`{"original":"F05285358D32726358A1072AC667B789976384D3EEA91F77A94EF4652CFC74AB","decrypted":"example"}`
+
 ### Hash a string
 
 ```
@@ -52,7 +72,15 @@ https://encryption-rest-api-jhk.appspot.com/hash?string=<text>&key=<private-key>
 
 Params: **string** (String), **key** (String)
 
+Returns: **JSON**
+
 Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/hash?string=<text>&key=<private-key>)
 
 This hashes the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
+
+Returns: **JSON**
+
+E.g.
+
+`{"original":"example","hash":"BC1F3DC1F9D98985F5B47C1C97DB8F697CF8303F8E2D840AD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AA"}`
  
