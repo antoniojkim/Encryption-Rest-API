@@ -73,9 +73,9 @@ public class EncryptionRestApiController {
         private String original = null;
         private String encrypted = null;
 
-        public Encrypted(String original, String encrypted) {
+        public Encrypted(String original, byte[] encrypted) {
             this.original = original;
-            this.encrypted = encrypted;
+            this.encrypted = ByteArrayOperations.bytesToHex(encrypted);
         }
 
         public String getOriginal() {
@@ -100,18 +100,18 @@ public class EncryptionRestApiController {
                                              @RequestParam(value="key", defaultValue = "") String key){
         if (key.length() > 0){
             ByteEncryption be = new ByteEncryption(key);
-            return new ResponseEntity<Encrypted>(new Encrypted(str, be.encryptUnicode(str)), HttpStatus.OK);
+            return new ResponseEntity<Encrypted>(new Encrypted(str, be.encrypt(str.getBytes())), HttpStatus.OK);
         }
-        return new ResponseEntity<Encrypted>(new Encrypted(str, be.encryptUnicode(str)), HttpStatus.OK);
+        return new ResponseEntity<Encrypted>(new Encrypted(str, be.encrypt(str.getBytes())), HttpStatus.OK);
     }
 
     private class Decrypted{
         private String original = null;
         private String decrypted = null;
 
-        public Decrypted(String original, String decrypted) {
+        public Decrypted(String original, ByteEncryption be) {
             this.original = original;
-            this.decrypted = decrypted;
+            this.decrypted = new String(be.decrypt(ByteArrayOperations.hexToBytes(original)));
         }
 
         public String getOriginal() {
@@ -136,9 +136,9 @@ public class EncryptionRestApiController {
                                              @RequestParam(value="key", defaultValue = "") String key){
         if (key.length() > 0){
             ByteEncryption be = new ByteEncryption(key);
-            return new ResponseEntity<Decrypted>(new Decrypted(str, be.decryptUnicode(str)), HttpStatus.OK);
+            return new ResponseEntity<Decrypted>(new Decrypted(str, be), HttpStatus.OK);
         }
-        return new ResponseEntity<Decrypted>(new Decrypted(str, be.decryptUnicode(str)), HttpStatus.OK);
+        return new ResponseEntity<Decrypted>(new Decrypted(str, be), HttpStatus.OK);
     }
 
     private class Hash{
