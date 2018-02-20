@@ -60,14 +60,14 @@ public class EncryptionRestApiController {
         return new ResponseEntity<PrivateKey>(new PrivateKey("", "Invalid Key Length"), HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/key/set", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
-    public ResponseEntity<PrivateKey> setPrivateKey(@RequestParam(value="key", defaultValue = "") String key){
-        if (key.length() == 0){
-            key = ByteArrayOperations.bytesToUnicode(ByteKeystore.generateKey(64));
-        }
-        be = new ByteEncryption(key);
-        return new ResponseEntity<PrivateKey>(new PrivateKey(key, "Private Key Set"), HttpStatus.OK);
-    }
+//    @RequestMapping(method = RequestMethod.POST, value = "/key/set", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+//    public ResponseEntity<PrivateKey> setPrivateKey(@RequestParam(value="key", defaultValue = "") String key){
+//        if (key.length() == 0){
+//            key = ByteArrayOperations.bytesToUnicode(ByteKeystore.generateKey(64));
+//        }
+//        be = new ByteEncryption(key);
+//        return new ResponseEntity<PrivateKey>(new PrivateKey(key, "Private Key Set"), HttpStatus.OK);
+//    }
 
     private class Encrypted{
         private String original = null;
