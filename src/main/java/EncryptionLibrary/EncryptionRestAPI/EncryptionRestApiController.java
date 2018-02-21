@@ -44,11 +44,13 @@ public class EncryptionRestApiController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/error", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<String> error(){
         return new ResponseEntity<String>("Encryption Rest API by Antonio Kim is not available right now.", HttpStatus.BAD_REQUEST);
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/key/generate", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<PrivateKey> generatePrivateKey(@RequestParam(value="length", defaultValue = "64") String length){
         try {
@@ -95,6 +97,7 @@ public class EncryptionRestApiController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/encrypt", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<Encrypted> encrypt(@RequestParam(value="string", defaultValue = "") String str,
                                              @RequestParam(value="key", defaultValue = "") String key){
@@ -111,7 +114,7 @@ public class EncryptionRestApiController {
 
         public Decrypted(String original, ByteEncryption be) {
             this.original = original;
-            this.decrypted = new String(be.decrypt(ByteArrayOperations.hexToBytes(original)));
+            this.decrypted = new String(be.decrypt(ByteArrayOperations.hexToBytes(original))).replaceAll("\u0000", "");
         }
 
         public String getOriginal() {
@@ -131,6 +134,7 @@ public class EncryptionRestApiController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/decrypt", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<Decrypted> decrypt(@RequestParam(value="string", defaultValue = "") String str,
                                              @RequestParam(value="key", defaultValue = "") String key){
@@ -167,6 +171,7 @@ public class EncryptionRestApiController {
         }
     }
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/hash", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<Hash> hash(@RequestParam(value="string", defaultValue = "") String str,
                                      @RequestParam(value="key", defaultValue = "") String key){
