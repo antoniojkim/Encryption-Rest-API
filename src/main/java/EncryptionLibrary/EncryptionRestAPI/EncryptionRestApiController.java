@@ -81,16 +81,32 @@ public class EncryptionRestApiController {
 
     private class KeyStore{
         private String scrambler = null;
-        private byte[][] keystore = null;
+        private int[][] keystore = null;
         public KeyStore(String scrambler){
             this.scrambler = scrambler;
-            keystore = ByteKeystore.generateKeystore(scrambler);
+            byte[][] keystore = ByteKeystore.generateKeystore(scrambler);
+            this.keystore = new int[keystore.length][keystore[0].length];
+            for (int i = 0; i<this.keystore.length; ++i){
+                for (int j = 0; j<this.keystore[i].length; ++j){
+                    this.keystore[i][j] = (int)keystore[i][j];
+                }
+            }
+        }
+        public KeyStore(){
+            this.scrambler = null;
+            byte[][] keystore = ByteKeystore.generateRandomKeystore();
+            this.keystore = new int[keystore.length][keystore[0].length];
+            for (int i = 0; i<this.keystore.length; ++i){
+                for (int j = 0; j<this.keystore[i].length; ++j){
+                    this.keystore[i][j] = (int)keystore[i][j];
+                }
+            }
         }
 
         public String getScrambler() {
             return scrambler;
         }
-        public byte[][] getKeystore() {
+        public int[][] getKeystore() {
             return keystore;
         }
     }
@@ -99,6 +115,12 @@ public class EncryptionRestApiController {
     @RequestMapping(method = RequestMethod.GET, value = "/generate/keystore", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<KeyStore> generateKeystore(@RequestParam(value="scrambler", defaultValue = "") String scrambler){
         return new ResponseEntity<KeyStore>(new KeyStore(scrambler), HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/generate/keystore/random", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+    public ResponseEntity<KeyStore> generateRandomKeystore(){
+        return new ResponseEntity<KeyStore>(new KeyStore(), HttpStatus.OK);
     }
 
 //    @RequestMapping(method = RequestMethod.POST, value = "/key/set", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
