@@ -28,13 +28,14 @@ E.g.
 ```
 https://encryption-rest-api-jhk.appspot.com/generate/keystore
 https://encryption-rest-api-jhk.appspot.com/generate/keystore?scrambler=<string>
+https://encryption-rest-api-jhk.appspot.com/generate/keystore/random
 ```
 
-Params: scrambler (String)
+Params: scrambler (String) (optional)
 
 Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/generate/keystore)
 
-This generates a keystore that can be used in the ByteEncryption algorithm.
+This generates a keystore that can be used in the ByteEncryption algorithm. It uses the scrambler to generate a unique keystore. If no scrambler is provided, the default scrambler is used. If the random href is used, then it will generate a random keystore.
  
 Returns: **JSON**
 
