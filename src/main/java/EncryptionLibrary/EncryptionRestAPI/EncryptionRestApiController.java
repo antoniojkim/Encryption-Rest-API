@@ -13,12 +13,35 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EncryptionRestApiController {
 
+    @CrossOrigin
     @GetMapping("/")
     public String defaultPage() {
         return "Hello! This is the Encryption Rest API by Antonio Kim. Visit https://github.com/antoniok9130/Encryption-Rest-API to see how to use this API.";
     }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/error", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+    public ResponseEntity<String> error(){
+        return new ResponseEntity<String>("Encryption Rest API by Antonio Kim is not available right now.", HttpStatus.BAD_REQUEST);
+    }
+
     private ByteEncryption be = new ByteEncryption("");
+
+    private class Original{
+        private String text = null;
+
+        public Original(String text){
+            this.text = text;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public void setText(String text) {
+            if (this.text == null)  this.text = text;
+        }
+    }
 
     private class PrivateKey{
         private String key = null;
@@ -45,13 +68,7 @@ public class EncryptionRestApiController {
     }
 
     @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, value = "/error", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
-    public ResponseEntity<String> error(){
-        return new ResponseEntity<String>("Encryption Rest API by Antonio Kim is not available right now.", HttpStatus.BAD_REQUEST);
-    }
-
-    @CrossOrigin
-    @RequestMapping(method = RequestMethod.GET, value = "/key/generate", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+    @RequestMapping(method = RequestMethod.GET, value = "/generate/key", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
     public ResponseEntity<PrivateKey> generatePrivateKey(@RequestParam(value="length", defaultValue = "64") String length){
         try {
             int size = Integer.parseInt(length);
@@ -60,6 +77,28 @@ public class EncryptionRestApiController {
         }
         catch(NumberFormatException e){}
         return new ResponseEntity<PrivateKey>(new PrivateKey("", "Invalid Key Length"), HttpStatus.BAD_REQUEST);
+    }
+
+    private class KeyStore{
+        private String scrambler = null;
+        private byte[][] keystore = null;
+        public KeyStore(String scrambler){
+            this.scrambler = scrambler;
+            keystore = ByteKeystore.generateKeystore(scrambler);
+        }
+
+        public String getScrambler() {
+            return scrambler;
+        }
+        public byte[][] getKeystore() {
+            return keystore;
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/generate/keystore", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
+    public ResponseEntity<KeyStore> generateKeystore(@RequestParam(value="scrambler", defaultValue = "") String scrambler){
+        return new ResponseEntity<KeyStore>(new KeyStore(scrambler), HttpStatus.OK);
     }
 
 //    @RequestMapping(method = RequestMethod.POST, value = "/key/set", produces = "application/json") // @RequestParam(value="index", defaultValue = "-1") String strIndex
@@ -72,20 +111,20 @@ public class EncryptionRestApiController {
 //    }
 
     private class Encrypted{
-        private String original = null;
+        private Original original = null;
         private String encrypted = null;
 
         public Encrypted(String original, byte[] encrypted) {
-            this.original = original;
+            this.original = new Original(original);
             this.encrypted = ByteArrayOperations.bytesToHex(encrypted);
         }
 
-        public String getOriginal() {
+        public Original getOriginal() {
             return original;
         }
 
         public void setOriginal(String original) {
-            if (this.original == null) this.original = original;
+            if (this.original == null) this.original = new Original(original);
         }
 
         public String getEncrypted() {
@@ -109,20 +148,20 @@ public class EncryptionRestApiController {
     }
 
     private class Decrypted{
-        private String original = null;
+        private Original original = null;
         private String decrypted = null;
 
         public Decrypted(String original, ByteEncryption be) {
-            this.original = original;
+            this.original = new Original(original);
             this.decrypted = new String(be.decrypt(ByteArrayOperations.hexToBytes(original))).replaceAll("\u0000", "");
         }
 
-        public String getOriginal() {
+        public Original getOriginal() {
             return original;
         }
 
         public void setOriginal(String original) {
-            if (this.original == null) this.original = original;
+            if (this.original == null) this.original = new Original(original);
         }
 
         public String getDecrypted() {
@@ -146,20 +185,20 @@ public class EncryptionRestApiController {
     }
 
     private class Hash{
-        private String original = null;
+        private Original original = null;
         private String hash = null;
 
         public Hash(String original, String decrypted) {
-            this.original = original;
+            this.original = new Original(original);
             this.hash = decrypted;
         }
 
-        public String getOriginal() {
+        public Original getOriginal() {
             return original;
         }
 
         public void setOriginal(String original) {
-            if (this.original == null) this.original = original;
+            if (this.original == null) this.original = new Original(original);
         }
 
         public String getHash() {

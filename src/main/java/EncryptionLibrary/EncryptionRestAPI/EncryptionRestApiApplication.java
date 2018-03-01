@@ -6,6 +6,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EncryptionRestApiApplication {
 
+    /*
+    To See active configuration:    gcloud config list
+    To See list of configurations:  gcloud config configurations list
+    To Activate a configuration:    gcloud config configurations activate <config-name>
+
+    mvn clean package
+    mvn appengine:deploy
+     */
+
     public static void main(String[] args) {
         SpringApplication.run(EncryptionRestApiApplication.class, args);
     }

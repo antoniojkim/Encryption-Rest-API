@@ -47,14 +47,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>EncryptionLibrary</groupId>
-			<artifactId>EncryptionLibrary</artifactId>
-			<version>1.0.0</version>
+			<groupId>jhk-encryption-library</groupId>
+			<artifactId>jhk-encryption-library</artifactId>
+			<version>1.0.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>EncryptionLibrary</groupId>
-			<artifactId>EncryptionLibrary</artifactId>
+			<groupId>jhk-encryption-library</groupId>
+			<artifactId>jhk-encryption-library</artifactId>
 			<version>RELEASE</version>
 		</dependency>
 	</dependencies>
