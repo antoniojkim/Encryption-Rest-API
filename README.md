@@ -7,8 +7,8 @@ All encrypting, decrypting, and hashing is done using the ByteEncryption algorit
 ### Generate Private Key
 
 ```
-https://encryption-rest-api-jhk.appspot.com/generate/key
-https://encryption-rest-api-jhk.appspot.com/generate/key?length=<integer>
+http://encryption.antoniojkim.com/generate/key
+http://encryption.antoniojkim.com/generate/key?length=<integer>
 ```
 
 Params: length (Integer)
@@ -26,14 +26,14 @@ E.g.
 ### Generate KeyStore
 
 ```
-https://encryption-rest-api-jhk.appspot.com/generate/keystore
-https://encryption-rest-api-jhk.appspot.com/generate/keystore?scrambler=<string>
-https://encryption-rest-api-jhk.appspot.com/generate/keystore/random
+http://encryption.antoniojkim.com/generate/keystore
+http://encryption.antoniojkim.com/generate/keystore?scrambler=<string>
+http://encryption.antoniojkim.com/generate/keystore/random
 ```
 
 Params: scrambler (String) (optional)
 
-Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/generate/keystore)
+Request Method:   [GET](http://encryption.antoniojkim.com/generate/keystore)
 
 This generates a keystore that can be used in the ByteEncryption algorithm. It uses the scrambler to generate a unique keystore. If no scrambler is provided, the default scrambler is used. If the random href is used, then it will generate a random keystore.
  
@@ -43,13 +43,13 @@ Returns: **JSON**
 ### Encrypt a string
 
 ```
-https://encryption-rest-api-jhk.appspot.com/encrypt?string=<text>
-https://encryption-rest-api-jhk.appspot.com/encrypt?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/encrypt?string=<text>
+http://encryption.antoniojkim.com/encrypt?string=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
-Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/encrypt?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/encrypt?string=<text>&key=<private-key>)
 
 This encrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
@@ -64,13 +64,13 @@ E.g.
 ### Decrypt a string
 
 ```
-https://encryption-rest-api-jhk.appspot.com/decrypt?string=<text>
-https://encryption-rest-api-jhk.appspot.com/decrypt?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/decrypt?string=<text>
+http://encryption.antoniojkim.com/decrypt?string=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
-Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/decrypt?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/decrypt?string=<text>&key=<private-key>)
 
 This decrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
@@ -83,15 +83,15 @@ E.g.
 ### Hash a string
 
 ```
-https://encryption-rest-api-jhk.appspot.com/hash?string=<text>
-https://encryption-rest-api-jhk.appspot.com/hash?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/hash?string=<text>
+http://encryption.antoniojkim.com/hash?string=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
 Returns: **JSON**
 
-Request Method:   [GET](https://encryption-rest-api-jhk.appspot.com/hash?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/hash?string=<text>&key=<private-key>)
 
 This hashes the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
