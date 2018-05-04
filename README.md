@@ -43,13 +43,13 @@ Returns: **JSON**
 ### Encrypt a string
 
 ```
-http://encryption.antoniojkim.com/encrypt?string=<text>
-http://encryption.antoniojkim.com/encrypt?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/encrypt?text=<text>
+http://encryption.antoniojkim.com/encrypt?text=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
-Request Method:   [GET](http://encryption.antoniojkim.com/encrypt?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/encrypt?text=<text>&key=<private-key>)
 
 This encrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
@@ -57,20 +57,20 @@ Returns: **JSON**
 
 E.g. 
 
-`{"text":"example","encrypted":"F05285358D32726358A1072AC667B789976384D3EEA91F77A94EF4652CFC74AB"}`
+`{"encrypted":"+4UD_WL3n+FneiWTgAqfco1JeozFrcG4XPWlmCudwH601"}`
 
 
 
 ### Decrypt a string
 
 ```
-http://encryption.antoniojkim.com/decrypt?string=<text>
-http://encryption.antoniojkim.com/decrypt?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/decrypt?text=<text>
+http://encryption.antoniojkim.com/decrypt?text=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
-Request Method:   [GET](http://encryption.antoniojkim.com/decrypt?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/decrypt?text=<text>&key=<private-key>)
 
 This decrypts the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
@@ -78,20 +78,20 @@ Returns: **JSON**
 
 E.g.
 
-`{"text":"F05285358D32726358A1072AC667B789976384D3EEA91F77A94EF4652CFC74AB","decrypted":"example"}`
+`{"decrypted": "<text>"}`
 
 ### Hash a string
 
 ```
-http://encryption.antoniojkim.com/hash?string=<text>
-http://encryption.antoniojkim.com/hash?string=<text>&key=<private-key>
+http://encryption.antoniojkim.com/hash?text=<text>
+http://encryption.antoniojkim.com/hash?text=<text>&key=<private-key>
 ```
 
 Params: **string** (String), **key** (String)
 
 Returns: **JSON**
 
-Request Method:   [GET](http://encryption.antoniojkim.com/hash?string=<text>&key=<private-key>)
+Request Method:   [GET](http://encryption.antoniojkim.com/hash?text=<text>&key=<private-key>)
 
 This hashes the *string* parameter using the *key* parameter. If a key is not provided, the default key will be used.
 
@@ -99,5 +99,5 @@ Returns: **JSON**
 
 E.g.
 
-`{"text":"example","hash":"BC1F3DC1F9D98985F5B47C1C97DB8F697CF8303F8E2D840AD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AAD0DDF25B46F343AA"}`
+`{"hash":"F02142FB686C5C15C1EE05E5D8916AEF72A1926F5B0BEB2D81B3177105EFCC061831984CF639C0790A0633F80BCE556EC7D17D84E6701C5679726F7DA4CD2742"}`
  
